@@ -2,14 +2,7 @@
 //  Created by Charles Parnot on 5/29/13.
 //  Copyright (c) 2013 Charles Parnot. All rights reserved.
 
-
-extern NSString * const ASCIIContextShapeIndex;
-extern NSString * const ASCIIContextFillColor;
-extern NSString * const ASCIIContextStrokeColor;
-extern NSString * const ASCIIContextLineWidth;
-extern NSString * const ASCIIContextShouldClose;
-extern NSString * const ASCIIContextShouldAntialias;
-
+#import <Foundation/Foundation.h>
 
 // iOS
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
@@ -28,8 +21,14 @@ extern NSString * const ASCIIContextShouldAntialias;
 #endif
 
 
-@interface PARImage (ASCIIInput)
+extern NSString * const ASCIIContextShapeIndex;
+extern NSString * const ASCIIContextFillColor;
+extern NSString * const ASCIIContextStrokeColor;
+extern NSString * const ASCIIContextLineWidth;
+extern NSString * const ASCIIContextShouldClose;
+extern NSString * const ASCIIContextShouldAntialias;
 
+@interface PARImage (ASCIIInput)
 
 /// @name Creating Images from ASCII Input
 
