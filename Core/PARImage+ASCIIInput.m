@@ -11,6 +11,7 @@ NSString * const ASCIIContextStrokeColor        = @"ASCIIContextStrokeColor";
 NSString * const ASCIIContextLineWidth          = @"ASCIIContextLineWidth";
 NSString * const ASCIIContextShouldClose        = @"ASCIIContextShouldClose";
 NSString * const ASCIIContextShouldAntialias    = @"ASCIIContextShouldAntialias";
+NSString * const ASCIIContextScale              = @"ASCIIContextScale";
 
 
 #pragma mark - PARImage Cross-Platform Image Class
@@ -506,10 +507,14 @@ NSString * const ASCIIContextShouldAntialias    = @"ASCIIContextShouldAntialias"
     NSArray *strictRep = [self strictASCIIRepresentationFromLenientASCIIRepresentation:rep];
     NSArray *shapes = [self shapesFromNumbersInStrictASCIIRepresentation:strictRep];
     
+    NSMutableDictionary *imgContext = [NSMutableDictionary dictionary];
+    contextHandler(imgContext);
+    CGFloat scale = imgContext[ASCIIContextScale] ? [imgContext[ASCIIContextScale] doubleValue] : 1.0f;
+    
     // image size
     NSUInteger countRows = strictRep.count;
     NSUInteger countCols = [strictRep[0] length];
-    NSSize imageSize = NSMakeSize(countCols, countRows);
+    NSSize imageSize = NSMakeSize(countCols * scale, countRows * scale);
     
     // image is drawn using the block API, so we can handle @2x drawing in HiDPI
     NSImage *image = [NSImage imageWithSize:imageSize flipped:NO drawingHandler:^BOOL(NSRect dstRect)

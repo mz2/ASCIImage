@@ -27,6 +27,7 @@ extern NSString * const ASCIIContextStrokeColor;
 extern NSString * const ASCIIContextLineWidth;
 extern NSString * const ASCIIContextShouldClose;
 extern NSString * const ASCIIContextShouldAntialias;
+extern NSString * const ASCIIContextScale;
 
 @interface PARImage (ASCIIInput)
 
