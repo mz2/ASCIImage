@@ -510,6 +510,8 @@ NSString * const ASCIIContextScale              = @"ASCIIContextScale";
     NSMutableDictionary *imgContext = [NSMutableDictionary dictionary];
     contextHandler(imgContext);
     CGFloat scale = imgContext[ASCIIContextScale] ? [imgContext[ASCIIContextScale] doubleValue] : 1.0f;
+    NSAffineTransform *scaleTransform = [NSAffineTransform new];
+    [scaleTransform scaleBy:scale];
     
     // image size
     NSUInteger countRows = strictRep.count;
@@ -526,6 +528,7 @@ NSString * const ASCIIContextScale              = @"ASCIIContextScale";
               // ... but don't let the handler mess up the graphics context
               NSMutableDictionary *contextASCII = [NSMutableDictionary dictionaryWithDictionary:@{ASCIIContextShapeIndex: @(shapeIndex)}];
               [[NSGraphicsContext currentContext] saveGraphicsState];
+              
               {
                   contextHandler(contextASCII);
               }
@@ -540,7 +543,7 @@ NSString * const ASCIIContextScale              = @"ASCIIContextScale";
               
               // bezier path from shape
               PARBezierPath *path = shouldClose ? [shape closedBezierPath] : [shape bezierPath];
-
+              [path transformUsingAffineTransform:scaleTransform];
               // draw!
               [[NSGraphicsContext currentContext] saveGraphicsState];
               {
